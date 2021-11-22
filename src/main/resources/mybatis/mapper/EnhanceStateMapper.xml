@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.shardingjdbc.mapper.OrderMapper">
+
+  <sql id="TABLE">
+    t_order
+  </sql>
+
+  <sql id="FIELD">
+    (price,user_id,status)
+  </sql>
+
+  <insert id="insertOrder">
+    insert into <include refid="TABLE"></include>
+    <include refid="FIELD"></include>
+    values (#{price},#{userId},#{status})
+  </insert>
+</mapper>
