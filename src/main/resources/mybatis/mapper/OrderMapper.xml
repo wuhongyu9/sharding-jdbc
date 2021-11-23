@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.shardingjdbc.mapper.OrderMapper">
+  <sql id="TABLE">
+    t_order
+  </sql>
+
+  <sql id="FIELD">
+    order_id,price,user_id,status
+  </sql>
+
+  <resultMap id="orderMap" type="com.why.shardingjdbc.entity.Order">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="user_id" jdbcType="BIGINT" property="userId"/>
+    <result column="status" javaType="String" property="status"></result>
+  </resultMap>
+
+  <insert id="insertOrder">
+    insert into <include refid="TABLE"></include>
+    (<include refid="FIELD"></include>)
+    values (#{price},#{userId},#{status})
+  </insert>
+  <select id="getOrders" resultMap="orderMap">
+    select <include refid="FIELD"></include>
+    from <include refid="TABLE"></include>
+    <where>
+      order_id in
+      <foreach collection="ids" open="(" close=")" separator="," item="id">
+        #{id}
+      </foreach>
+    </where>
+  </select>
+  <select id="orderById" resultMap="orderMap">
+    select <include refid="FIELD"></include>
+    from <include refid="TABLE"></include>
+    order by order_id asc
+    limit 0,10
+  </select>
+</mapper>
