@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.sharding.sub.mapper.ProductInfoMapper">
+  <sql id="TABLE">
+    product_info
+  </sql>
+
+  <sql id="FIELD">
+    product_info_id,store_info_id,product_name,spec,region_code,price,image_url
+  </sql>
+
+  <sql id="INSERT_FIELD">
+    store_info_id,product_name,spec,region_code,price,image_url
+  </sql>
+
+
+  <resultMap id="productInfoMap" type="com.why.sharding.sub.entity.ProductInfo">
+    <id column="product_info_id" jdbcType="BIGINT" property="productInfoId" />
+    <result column="store_info_id" jdbcType="DOUBLE" property="storeInfoId" />
+    <result column="product_name" jdbcType="BIGINT" property="productName"/>
+    <result column="spec" javaType="String" property="spec"></result>
+    <result column="region_code" javaType="String" property="regionCode"></result>
+    <result column="price" javaType="String" property="price"></result>
+    <result column="image_url" javaType="String" property="imgUrl"></result>
+  </resultMap>
+
+  <insert id="insertProductInfo" useGeneratedKeys="true" keyProperty="productInfo.productInfoId" keyColumn="product_info_id">
+    insert into <include refid="TABLE"></include>
+    (<include refid="INSERT_FIELD"></include>) values(#{productInfo.storeInfoId},
+    #{productInfo.productName},#{productInfo.spec},#{productInfo.regionCode},#{productInfo.price},#{productInfo.imgUrl})
+  </insert>
+</mapper>

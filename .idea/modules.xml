@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/master_slaver/master_slaver.iml" filepath="$PROJECT_DIR$/master_slaver/master_slaver.iml" />
       <module fileurl="file://$PROJECT_DIR$/myshardingjdbc.iml" filepath="$PROJECT_DIR$/myshardingjdbc.iml" />
     </modules>
   </component>

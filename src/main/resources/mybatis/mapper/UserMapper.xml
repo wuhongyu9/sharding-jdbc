@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.shardingjdbc.mapper.UserMapper">
+  <resultMap id="resultMap" type="com.why.shardingjdbc.entity.User">
+    <id column="user_id" javaType="Long" property="userId"></id>
+    <result column="username" javaType="String" property="userName"></result>
+    <result column="age" javaType="Integer" property="age"></result>
+  </resultMap>
+
+  <sql id="TABLE">
+    t_user
+  </sql>
+
+  <sql id="FIELD">
+    user_id,username,age
+  </sql>
+
+  <insert id="insertUser">
+    insert into <include refid="TABLE"></include>
+    (<include refid="FIELD"></include>)
+    values(#{userId},#{userName},#{age})
+  </insert>
+
+</mapper>

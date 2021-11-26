@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.sharding.sub.mapper.ProductDescriptMapper">
+  <sql id="TABLE">
+    product_descript
+  </sql>
+
+  <sql id="FIELD">
+    id,product_info_id,descript,store_info_id
+  </sql>
+
+  <sql id="INSERT_FIELD">
+    product_info_id,desc1,store_info_id
+  </sql>
+
+  <resultMap id="productDescriptMap" type="com.why.sharding.sub.entity.ProductDesc">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="store_info_id" jdbcType="BIGINT" property="storeInfoId" />
+    <result column="desc1" javaType="String" property="desc"/>
+    <result column="product_info_id" jdbcType="BIGINT" property="productInfoId"></result>
+  </resultMap>
+
+  <insert id="insertProductDescript" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into <include refid="TABLE"></include>
+    (<include refid="INSERT_FIELD"></include>)
+    values(#{productInfoId},#{desc},#{storeInfoId})
+  </insert>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.why.sharding.sub.mapper.StoreMapper">
+  <sql id="TABLE">
+    store_info
+  </sql>
+
+  <sql id="FIELD">
+    id,store_name,reputation,region_code
+  </sql>
+
+  <sql id="INSERT_FIELD">
+    store_name,reputation,region_code
+  </sql>
+
+  <resultMap id="productInfoMap" type="com.why.sharding.sub.entity.StoreInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="store_name" javaType="String" property="storeName" />
+    <result column="reputation" jdbcType="INTEGER" property="reputation"/>
+    <result column="region_code" javaType="String" property="regionCode"></result>
+  </resultMap>
+
+  <insert id="insertStoreInfo" useGeneratedKeys="true" keyProperty="storeInfo.id" keyColumn="id">
+    insert into <include refid="TABLE"></include>
+    (<include refid="INSERT_FIELD"></include>) values(#{storeInfo.storeName},
+    #{storeInfo.reputation},#{storeInfo.regionCode})
+  </insert>
+</mapper>
